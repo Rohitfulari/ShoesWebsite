@@ -1,0 +1,551 @@
+-> Node js is javascript run time environment, it provide us javascript Engine V8 by Google,
+-> REPL : READ EXECUTE PRINT LOOP;
+
+->Theri are three types of Module :-
+            1.Local Module :-
+                    we make it and we can use it in another file as we require by just like = 
+                        require('./filename.js);
+            
+            2. Core Module :-
+                    a.FILE SYSTEM (fs) = 
+
+                        const fs = require("fs");
+                        we decalre module because we want to use functionality of module.
+
+
+                        READFILE :=
+                                    //readFile is to read the content of the file
+
+                                    //syncronus way
+                                            const fs = require('fs');
+                                            fs.readFile('file.txt','utf-8',(err,data) => { 
+
+                                                if(err){
+                                                    console.log(err);
+                                                }
+                                                console.log(data);
+                                            })
+
+                                    //asyncway
+
+                                            const a = fs.readFileSync('file.txt','utf-8');
+                                            console.log(a);
+
+
+                        WRITEFILE :=
+                                    // indirectly creating a file with content in it
+
+                                    //Syncronus way
+
+                                            fs.writeFile('text.txt','YE HUMNE BANAYA!',(err) => {
+                                                if(err)
+                                                {
+                                                    console.log(err);
+                                                }
+                                                console.log("FILE HAS BEEN SUCCESFULLY BAN GAE !");
+                                            })
+
+                                    //Asynway
+
+                                            const b = fs.writeFileSync('text2.txt','ANOTHER FILE BY ASYNC!','utf-8');
+                                            console.log("FILE ASYN WALI BHI BAN GAE !");
+
+                        
+                            // when we use writeFileSync() method ...
+                            if the file is not present  then file will be created and if it is  present then override the text inside the created file.
+
+                                                        
+                            //how to add extra data??
+                            fs.appendFileSync("read.txt", "hello guys how are you?" ); //don't override the text inside the created file.
+
+                        
+
+
+                        PATH :=
+
+                                    const path =  require('path');
+                                    
+                                    console.log(__filename);
+                                    console.log(path.basename(__filename));
+                                    console.log(path.basename(__dirname));
+                                    console.log(path.join('/hello','/rohit'));
+
+                                    EXAMPLE :-
+
+                                        // console.log(path.dirname('C:/Users/hpind/OneDrive/Desktop/NodeJs/PathModule/path.js')); 
+                                        // console.log(path.extname('C:/Users/hpind/OneDrive/Desktop/NodeJs/PathModule/path.js'));
+                                        // console.log(path.basename('C:/Users/hpind/OneDrive/Desktop/NodeJs/PathModule/path.js'));
+
+
+                                        // console.log(path.parse('C:/Users/hpind/OneDrive/Desktop/NodeJs/PathModule/path.js'));
+
+                                        // const path1 = path.parse('C:/Users/hpind/OneDrive/Desktop/NodeJs/PathModule/path.js');
+                                        // console.log(path1.root);
+                                        // console.log(path1.ext);
+                                        // console.log(path1.name);
+                                        // console.log(path1.base);
+
+
+
+
+
+                    b. OPERATING SYSTEM (os) :=
+
+                        const os = require("os");
+
+                                using OS module ...we can get the local information(about operating system) of our system
+                                The OS module in Nodejs provides operating system-related utility methods and properties.
+                                It helps retrieve system information such as CPU details, memory usage.
+
+
+                                    const a = os.freemem();
+                                    //ise muzhe os ki memory free hai wo pata chalegi
+                                    console.log(a);
+
+                                    const b = os.totalmem();
+                                    console.log(b);
+                                    //ise muzhe pata lagega ki meri total memory kitni hai
+
+                                    const c = os.userInfo();
+                                    console.log(c);
+                                    //ise ppoata lagega user information  
+
+                                    const d = os.cpus();
+                                    console.log(d);
+                                    //ise pata lgta hai infformation about the cpu
+
+                                    const e = os.endianness();
+                                    console.log(e)
+
+                    
+                    c.HTTP CORE MODULE :=
+
+                        CREATING YOUR OWN SERVER =
+
+                            const http = require("http");
+
+                            const server = http.createServer((req,res) => {
+
+                                
+                                res.end('Server is running!');
+                                // this will print on the browser
+
+                            })
+
+                            //res :-Used to send data back to the client.
+
+                            server.listen(3000,() => {
+
+                                console.log('Server is running at http://localhost:3000');
+                                
+                            })
+                
+
+            3.Third Party Module :- 
+
+
+
+
+        
+-> JSON :== 
+
+        JSON stands for JavaScript Object Notation . 
+        JSON is a lightweight format for storing and transporting data.
+        (to store the data throughout server to  webpage)
+
+        JSON is often used when data is sent from a server to a webpage.
+        
+
+        Two methods of JSON :
+
+        1 Stringify(): convert object into json and pass the object as an argument
+        2 parse(): convert json into object
+
+
+
+        CODE : ==
+
+            const fs = require('fs');
+
+            const data = {
+                name:"ROHITT",
+                rollno:"11"
+            }
+
+            console.log(data); //{ name: 'ROHITT', rollno: '11' }
+
+            const converter =  JSON.stringify(data);
+            console.log(converter) //{"name":"ROHITT","rollno":"11"}
+
+
+            console.log(converter.name); //undefine so we have to use parse to make object convert to json
+
+            fs.writeFile('json1.json',converter,(err) => {
+                if(err)
+                {
+                    console.log(err)
+                }
+                console.log("HOGAYA")
+            })
+
+            fs.readFile('json1.json','utf-8',(err,data) => {
+                if(err)
+                {
+                    console.log(err)
+                }
+                console.log(data);
+                const abc = JSON.parse(data);
+                console.log(abc.name);
+            })
+
+
+->  we can exports module like : -
+                module.exports.functionName = functionality 
+                        eg: - module.exports.arr = {"iteam1","iteam2"}
+
+
+-> index.js : - 
+
+                                   // const http = require("http");
+                                    // const server = http.createServer((req,res) => {  
+                                        
+
+                                    //     //HANDLING ROUTING 
+                                    //     if(req.url == '/')
+                                    //     {
+                                    //         res.end('ON HOME PAGE!');
+                                    //     }
+                                    //     else if(req.url == '/about')
+                                    //     {
+                                    //         res.end('ON ABOUT PAGE!');
+                                    //     }
+                                    //     else if(req.url == '/contact')
+                                    //     {
+                                    //         res.end('ON CONTACT PAGE');
+                                    //     }
+                                    //     else
+                                    //     {
+                                    //         console.log(res.url);
+                                    //         res.end('Server is running!');
+                                    //     }
+
+                                    // })
+
+                                    // //res :-Used to send data back to the client.
+
+                                    // server.listen(3000,() => {
+                                    //     console.log('Server is running at http://localhost:3000');  
+                                    // })     
+
+
+
+
+
+
+                                    //===================================OR===========USING EXPRESS=================
+
+
+                                    const express = require('express');
+                                    const path = require('path');
+                                    const app = express();
+                                    const route = express.Router();
+                                    const port = 3000;
+
+
+                                    // const practise = function(req,res,next){
+                                    //     console.log("EXAMPLE TO PRACTISE!");
+                                    //     next();
+                                    // }
+
+                                    // const time = function(req,res,next){
+                                    //     req.time = Date.now();
+                                    //     next();
+                                    // }
+
+
+                                    //ANOTHER WAY OF WRITING MIDDLEWEAR
+                                    const checkage = (req,res,next) => {
+                                        if(!req.query.age)
+                                        {
+                                            res.send("AGE IS MANDIATORY IN THE URL")
+                                        }
+                                        else if(req.query.age < 18)
+                                        {
+                                            //alert are not used in node js so
+                                            res.send("AG IS MANDATIORY !");
+                                        }
+                                        else{
+                                            next();
+                                        }
+                                    }
+
+                                    // app.use(checkage); //to apply for every page before access
+
+                                    //to apply the middlwear for perticular pages we use
+                                    route.use(checkage);
+
+
+
+
+                                    //we use route instead of app
+                                    route.use(express.static(path.join(__dirname,'Public'))); 
+
+
+                                    // THIS CAN BE THE WAY TO DIRECTLY OPEN BROWSER WITH LOGIN PAGE IT WILL LOAD INDEX.HTML
+
+                                    // app.use(practise);
+                                    // app.use(time);
+
+
+
+                                    // app.get('/', (req,res) => {
+                                    //     res.send("HELLO WORLD!");
+                                    // });
+
+                                    app.get('/contact', (req,res) => {
+                                        res.sendFile(path.join(__dirname,'Public','contact.html'));
+                                    });
+
+                                    app.get('/about', (req,res) => {
+                                        res.sendFile(path.join(__dirname,'Public','about.html'));
+                                    });
+
+
+                                    app.get('/login',(req,res) => {
+                                        res.sendFile(path.join(__dirname,'Public','login.html'));
+                                    });
+
+                                    app.get('/time',(req,res) => {
+                                        let timenow  = `THE TIME IS ${req.time}`;
+                                        res.send(timenow);
+                                    })
+
+                                    app.use('/',route);
+
+                                    app.use((req,res) => {
+                                        res.status(404).send("PAGE NOT FOUND !");
+                                    })
+
+
+
+                                    app.listen(port, () => {
+                                        console.log(`SERVER IS RUNNING OF http://localhost:${port}`)
+                                    });
+
+
+
+
+
+
+
+                                    ////////////////////////////////////////////////////// PRACTISE ///////////////////////////////
+
+
+                                    // const path = require('path');
+                                    // const express = require('express');
+                                    // const app = express();
+
+
+                                    // //MIDDLEWEAR 1
+                                    // app.use((req,res,next) => {
+                                    //     console.log("FIERST ONE");
+                                    //     next();
+
+                                    // })
+
+                                    // //MIDDLWEAR 2
+                                    // app.use((req,res,next) => {
+                                    //     console.log("SECOND ONE");
+                                    //     next();
+                                    // })
+
+                                    // app.get('/',(req,res) => {
+                                    //     console.log("HOMEPAGE");
+                                    // })
+
+                                    // app.get('/about',(req,res) => {
+                                    //     console.log("ABOUT PAGE");
+                                    // })
+
+                                    // app.listen(8000,(err) => {
+                                        
+                                    //     console.log(`HOST IS RUNNING ON : 8000`);
+                                    // })
+
+
+->ERROR HANDELING : - 
+
+                Error Handling refers to how Express catches and processes errors that occur both synchronously and asynchronously.
+                Express comes with a default error handler so you don’t need to write your own to get started.
+
+                _ For errors returned from asynchronous functions invoked by route handlers and middleware, 
+                    you must pass them to the next() function, where Express will catch and process them. For example:
+
+                                app.get('/', (req, res, next) => {
+                                    fs.readFile('/file-does-not-exist', (err, data) => {
+                                        if (err) {
+                                   --->>>     next(err) // Pass errors to Express.
+                                        } else {
+                                        res.send(data)
+                                        }
+                                    })
+                                    })
+
+                _ WHOLE CODE WITH ROUTING AND SERVER : -
+
+                                const express = require('express');
+                                const fs = require('fs');
+                                const PORT = 3000;
+                                const app = express();
+
+                                app.get('/',(req,res,next) => {
+                                    if(req.url != '/'){
+                                        
+                                        next(err);
+                                    }
+
+
+                                    res.send("ON HOEM PAGE !");
+                                
+                                });
+
+                                app.get('*',(req,res,next) => {
+                                    next(err);
+                                })
+
+                                app.use((err,req,res,next) => {
+                                    res.status(500).send("URL IS NOT RIGHT !");
+
+                                });
+
+                                app.listen(PORT,(err)=> {
+                                    console.log(`THE SERVER IS ON :http://localhost:${PORT}`)
+
+                                })
+
+---->>>> Custom error-handling middleware should be placed last in the sequence because it only runs when next(err) is called.
+        If no rejected value is provided, next will be called with a default Error object provided by the Express router.
+                
+
+AUTHENTICATION AND AUTHORIZATION PART:--
+
+-> to secure our passwork from admin also means if i want to hide the password in database also the we use 
+    BCRYPTJS module to convert the password in hash form by using method as : --> 
+
+                loginRouter.post("/login", async(req,res) => {
+
+
+          ----->>>>> by using this line we can convert password into hash Part
+                          let hashpassword =  await bcrypt.hash(req.body.pass,10);
+
+                    
+
+                    try {
+                        let user = loginModel({
+                            email:req.body.email,
+                           
+          ---->>>>          pass:hashpassword
+                            // here we are adding the converted hash part of an password not exactly the password
+                                
+                        });
+                        let done  = await user.save();
+                    
+                        res.send("LOGIN SUCCESSFULLY");
+                        
+                    } catch (error) {
+                        console.log("Error is their in submission of data",error.message);
+                        res.status(500).json({error:error.message});
+                        
+                    }
+                    
+                })
+
+    |_>  now as we have converted password into hashpassword so at the login we have to chech the "hashpassword"
+        instead of real "pass" as : -> 
+
+                app.post('/login', async (req, res) => {
+            
+                    try {
+                        
+                        //Fetching the User :
+                        // retrieves a user from a MongoDB database based on the email provided in the request body (req.body.email).
+                        // If no user is found, user will be null.
+                        
+                        let user = await User.findOne({email: req.body.email })
+
+                        //Email Validation :
+                        if (!user) throw 'invalid email id'   //If user is not found (i.e., null), 
+                                                            // an error is thrown with the message 'invalid email id'.
+
+                        // Password Validation :
+                        // if (user.password !=req.body.password) throw 'incorrect password'  
+
+                        let isvalidPass = await bcrypt.compare(req.body.password,user.password)  
+                        if(!isvalidPass) throw 'invalid password'
+                        
+                    
+                        // If the email is valid but the password does not match (user.password != req.body.password),
+                        // an error is thrown with the message 'incorrect password'.
+
+
+                        res.send({                         //Success Response:
+                            message: 'login successful',  //If both the email and password are valid, the server sends a success response.
+                            user: user                   //The response includes a message and the user object.
+                        })
+                        
+                    } catch (e) {                       //Error Handling:
+                        res.send({                     // If any error occurs during the execution of the try block, the catch block handles it.
+                            message: e                // The error is sent back in the response as message.
+
+                        })
+                    }
+
+                })
+
+->
+->
+->
+->
+->
+->
+->
+
+->
+->
+->
+->
+->
+->
+->
+->
+->
+->
+->
+->
+->
+->
+->
+->
+->
+->
+
+->
+->
+->
+->
+->
+->
+->
+->
+->->
+
+->
+->
+->
+->
+->->
+
+->
+->
+->
+->
